@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Settings";
+}
+<h1>@ViewData["Title"]</h1>
+
+<div class="form-group">
+    <input id="radioBinary" type="radio" value="binary" name="gameMode" checked onclick="SaveMode('binary')"/> Binary(Yes/No)
+    <br />
+    <input id="radioMultiple" type="radio" value="multiple" name="gameMode" onclick="SaveMode('multiple')"/> Multiple choice question
+</div>

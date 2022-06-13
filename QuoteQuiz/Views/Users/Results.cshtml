@@ -1,0 +1,46 @@
+﻿@model IEnumerable<QuoteQuiz.Models.ResultsModel>
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h1>@ViewBag.User's Results</h1>
+
+<div>
+    <hr />
+    @foreach(var answer in Model)
+    {
+        <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelItem => answer.Question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => answer.Question.Text)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelItem => answer.Author)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => answer.Author.FullName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(modelItem => answer.UserAnswer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(modelItem => answer.UserAnswer)
+        </dd>
+    </dl>
+    <hr />
+    }
+    
+</div>
+<div>
+    @if (ViewBag.CurrentUser == ViewBag.user)
+    {
+        <a asp-action="LogOut">Log out</a>
+    }
+    else
+    {
+        <a asp-action="Index" class="back-btn">Back to the list</a>
+    }
+</div>

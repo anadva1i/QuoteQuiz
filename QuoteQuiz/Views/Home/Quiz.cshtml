@@ -1,0 +1,51 @@
+﻿@model QuoteQuiz.Models.QuizModel
+@*@inject IHttpContextAccessor HttpContextAccessor*@
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Quote (@Model.Counter/@Model.MaxQuestions)</h1>
+
+<div id="quotes">
+    <hr />
+    <form asp-action="SubmitAnswer">
+    <p>Who said it?</p>
+
+    <dl id="multiple" class="row">
+        <input type="hidden" asp-for="Question.Id" />
+            <dd class = "col-sm-10 quote-bg">
+                @Html.DisplayFor(model => model.Question.Text)
+            </dd>      
+        @foreach(var author in Model.Authors)
+        {
+             <dd class = "col-sm-10">
+                 <input asp-for="UserAnswer" type="radio" value="@author.Id"/>
+                   @author.FullName
+             </dd>
+        }
+         <div class="form-group">
+                <input id="submitBtn" type="submit" value="Next" class="btn btn-primary hidden" />
+         </div>
+    </dl>
+
+    <dl id="binary" class="row">
+        <input type="hidden" asp-for="Question.Id" />
+        <input type="hidden" asp-for="UserAnswer" value="@Model.Authors.First().Id" />
+             <dd class = "col-sm-10 quote-bg">
+                @Html.DisplayFor(model => model.Question.Text)
+            </dd>  
+        <dd class = "col-sm-12">
+            <span style="float: right">- @Model.Authors.First().FullName?</span>
+        </dd>
+        <dd class = "col-sm-10">
+            <input asp-for="Correct" type="radio" value="true"/> Yes <br />
+            <input asp-for="Correct" type="radio" value="false"/> No
+         </dd>
+         <div class="form-group">
+                <input id="submitBtn" type="submit" value="Next" class="btn btn-primary hidden" />
+         </div>
+    </dl>
+    </form>
+</div>
+
+
