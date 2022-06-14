@@ -5,9 +5,38 @@
 
 function SaveMode(mode) {
     sessionStorage.setItem('mode', mode);
+    $("#alert").addClass("show");
 }
 
-$("#quotes input:radio").click(() => {
+function alert(answer, author) {
+    if (answer) {
+        $("#alertSuccess").html("Correct! The right answer is: <b>" + author + "</b>")
+        $("#alertSuccess").addClass("show");
+    }
+    else {
+        $("#alertDanger").html("Sorry,you are wrong! The right answer is: <b>" + author + "</b>")
+        $("#alertDanger").addClass("show");
+    }
+}
+
+$("#quotes input:radio").click(function() {
+    var author = $("#author").val();
+    var label = $("label[for='" + $(this).attr('id') + "']").text();
+    console.log(label)
+    var spanAuthor = $("#spanAuthor").text().replace("- ", "").replace("?", "");
+    console.log(spanAuthor)
+    $("#quotes input:radio").remove();
+    var userAnswer = label;
+    $("#quotes label").remove();
+    if (label == "Yes")
+        userAnswer = spanAuthor
+    else if (label == "No")
+        userAnswer = author;
+    console.log(userAnswer, author)
+    if (userAnswer == author)
+        alert(true, author)
+    else alert(false, author);
+    $(".span-author").text("- " + author)
     $(".hidden").removeClass("hidden");
 });
 

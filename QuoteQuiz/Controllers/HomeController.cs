@@ -79,6 +79,7 @@ namespace QuoteQuiz.Controllers
                     else
                         model.Authors.Add(randomAuthor);
                 }
+                TempData["author"] = dB_QuoteQuizContext[r].Author.FullName;
                 return View(model);
             }
             else return RedirectToAction("results", "users", new { id = userId});

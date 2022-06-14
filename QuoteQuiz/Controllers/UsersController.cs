@@ -58,6 +58,9 @@ namespace QuoteQuiz.Controllers
                 model.UserAnswer = userAnswered.FullName;
                 if (answer.Correct == false)
                     model.UserAnswer = "Not " + userAnswered.FullName;
+                if (model.UserAnswer == model.Author.FullName)
+                    model.Class = "bg-correct";
+                else model.Class = "bg-wrong";
                 modelList.Add(model);
             }
 
